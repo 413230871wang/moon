@@ -1,2 +1,4 @@
-/.settings/*
-/.project
+# Created by .ignore support plugin (hsz.mobi)
+.idea
+moon.iml
+*.iml
