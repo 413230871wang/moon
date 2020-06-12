@@ -16,7 +16,7 @@ import org.apache.zookeeper.data.Stat;
  * 
  */
 public class CuratorCURDDemo {
-	private static final String ZK_ADRESS = "127.0.0.1:2181,127.0.0.1:2181,127.0.0.1:2181";
+	private static final String ZK_ADRESS = "49.235.199.135:2181";
 	private static final String ZK_PATH = "/zktest";
 	private static CuratorFramework client = CuratorFrameworkFactory.newClient(ZK_ADRESS, new RetryNTimes(10, 5000));
 	static {
