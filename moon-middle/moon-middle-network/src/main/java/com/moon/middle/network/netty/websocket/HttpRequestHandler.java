@@ -26,6 +26,7 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
     static {
         URL location = HttpRequestHandler.class.getProtectionDomain().getCodeSource().getLocation();
         try{
+            System.out.println("URI="+location.toURI());
             String path = location.toURI()+"index.html";
             path = !path.contains("file:")?path:path.substring(5);
             INDEX = new File(path);
@@ -75,6 +76,7 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        System.out.println("出错了");
         cause.printStackTrace();
         ctx.close();
     }
