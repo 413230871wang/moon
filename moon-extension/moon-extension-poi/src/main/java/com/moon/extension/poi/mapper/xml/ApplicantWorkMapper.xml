@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moon.extension.poi.mapper.ApplicantWorkMapper" >
+  <resultMap id="BaseResultMap" type="com.moon.extension.poi.model.ApplicantWork" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ID_NO" property="idNo" jdbcType="VARCHAR" />
+    <result column="WORK_START" property="workStart" jdbcType="VARCHAR" />
+    <result column="WORK_END" property="workEnd" jdbcType="VARCHAR" />
+    <result column="WORK_COMPANY" property="workCompany" jdbcType="VARCHAR" />
+    <result column="WORK_POST" property="workPost" jdbcType="VARCHAR" />
+    <result column="WORK_SALARY" property="workSalary" jdbcType="VARCHAR" />
+    <result column="WORK_END_REASON" property="workEndReason" jdbcType="VARCHAR" />
+    <result column="WORK_WITNESS" property="workWitness" jdbcType="VARCHAR" />
+    <result column="WORK_WITNESS_PHONE" property="workWitnessPhone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ID_NO, WORK_START, WORK_END, WORK_COMPANY, WORK_POST, WORK_SALARY, WORK_END_REASON, 
+    WORK_WITNESS, WORK_WITNESS_PHONE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.moon.extension.poi.model.ApplicantWorkExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from APPLICANT_WORK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from APPLICANT_WORK
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from APPLICANT_WORK
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.moon.extension.poi.model.ApplicantWorkExample" >
+    delete from APPLICANT_WORK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.moon.extension.poi.model.ApplicantWork" >
+    insert into APPLICANT_WORK (ID, ID_NO, WORK_START, 
+      WORK_END, WORK_COMPANY, WORK_POST, 
+      WORK_SALARY, WORK_END_REASON, WORK_WITNESS, 
+      WORK_WITNESS_PHONE)
+    values (#{id,jdbcType=INTEGER}, #{idNo,jdbcType=VARCHAR}, #{workStart,jdbcType=VARCHAR}, 
+      #{workEnd,jdbcType=VARCHAR}, #{workCompany,jdbcType=VARCHAR}, #{workPost,jdbcType=VARCHAR}, 
+      #{workSalary,jdbcType=VARCHAR}, #{workEndReason,jdbcType=VARCHAR}, #{workWitness,jdbcType=VARCHAR}, 
+      #{workWitnessPhone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.moon.extension.poi.model.ApplicantWork" >
+    insert into APPLICANT_WORK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="idNo != null" >
+        ID_NO,
+      </if>
+      <if test="workStart != null" >
+        WORK_START,
+      </if>
+      <if test="workEnd != null" >
+        WORK_END,
+      </if>
+      <if test="workCompany != null" >
+        WORK_COMPANY,
+      </if>
+      <if test="workPost != null" >
+        WORK_POST,
+      </if>
+      <if test="workSalary != null" >
+        WORK_SALARY,
+      </if>
+      <if test="workEndReason != null" >
+        WORK_END_REASON,
+      </if>
+      <if test="workWitness != null" >
+        WORK_WITNESS,
+      </if>
+      <if test="workWitnessPhone != null" >
+        WORK_WITNESS_PHONE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="idNo != null" >
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="workStart != null" >
+        #{workStart,jdbcType=VARCHAR},
+      </if>
+      <if test="workEnd != null" >
+        #{workEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="workCompany != null" >
+        #{workCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="workPost != null" >
+        #{workPost,jdbcType=VARCHAR},
+      </if>
+      <if test="workSalary != null" >
+        #{workSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="workEndReason != null" >
+        #{workEndReason,jdbcType=VARCHAR},
+      </if>
+      <if test="workWitness != null" >
+        #{workWitness,jdbcType=VARCHAR},
+      </if>
+      <if test="workWitnessPhone != null" >
+        #{workWitnessPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+    <insert id="insertByList" parameterType="list">
+      insert into APPLICANT_WORK (ID, ID_NO, WORK_START,
+      WORK_END, WORK_COMPANY, WORK_POST,
+      WORK_SALARY, WORK_END_REASON, WORK_WITNESS,
+      WORK_WITNESS_PHONE)
+    values
+      <foreach collection="list" item="work" separator="," open="(" close=")">
+      #{work.idNo,jdbcType=VARCHAR}, #{work.workStart,jdbcType=VARCHAR},
+      #{work.workEnd,jdbcType=VARCHAR}, #{work.workCompany,jdbcType=VARCHAR}, #{work.workPost,jdbcType=VARCHAR},
+      #{work.workSalary,jdbcType=VARCHAR}, #{work.workEndReason,jdbcType=VARCHAR}, #{work.workWitness,jdbcType=VARCHAR},
+      #{work.workWitnessPhone,jdbcType=VARCHAR}
+      </foreach>
+    </insert>
+    <select id="countByExample" parameterType="com.moon.extension.poi.model.ApplicantWorkExample" resultType="java.lang.Integer" >
+    select count(*) from APPLICANT_WORK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectWorkMapByIdNo" parameterType="string" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from APPLICANT_WORK
+    where idNo = #{idNo,jdbcType=VARCHAR}
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update APPLICANT_WORK
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.idNo != null" >
+        ID_NO = #{record.idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workStart != null" >
+        WORK_START = #{record.workStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workEnd != null" >
+        WORK_END = #{record.workEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workCompany != null" >
+        WORK_COMPANY = #{record.workCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workPost != null" >
+        WORK_POST = #{record.workPost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workSalary != null" >
+        WORK_SALARY = #{record.workSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workEndReason != null" >
+        WORK_END_REASON = #{record.workEndReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workWitness != null" >
+        WORK_WITNESS = #{record.workWitness,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workWitnessPhone != null" >
+        WORK_WITNESS_PHONE = #{record.workWitnessPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update APPLICANT_WORK
+    set ID = #{record.id,jdbcType=INTEGER},
+      ID_NO = #{record.idNo,jdbcType=VARCHAR},
+      WORK_START = #{record.workStart,jdbcType=VARCHAR},
+      WORK_END = #{record.workEnd,jdbcType=VARCHAR},
+      WORK_COMPANY = #{record.workCompany,jdbcType=VARCHAR},
+      WORK_POST = #{record.workPost,jdbcType=VARCHAR},
+      WORK_SALARY = #{record.workSalary,jdbcType=VARCHAR},
+      WORK_END_REASON = #{record.workEndReason,jdbcType=VARCHAR},
+      WORK_WITNESS = #{record.workWitness,jdbcType=VARCHAR},
+      WORK_WITNESS_PHONE = #{record.workWitnessPhone,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.moon.extension.poi.model.ApplicantWork" >
+    update APPLICANT_WORK
+    <set >
+      <if test="idNo != null" >
+        ID_NO = #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="workStart != null" >
+        WORK_START = #{workStart,jdbcType=VARCHAR},
+      </if>
+      <if test="workEnd != null" >
+        WORK_END = #{workEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="workCompany != null" >
+        WORK_COMPANY = #{workCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="workPost != null" >
+        WORK_POST = #{workPost,jdbcType=VARCHAR},
+      </if>
+      <if test="workSalary != null" >
+        WORK_SALARY = #{workSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="workEndReason != null" >
+        WORK_END_REASON = #{workEndReason,jdbcType=VARCHAR},
+      </if>
+      <if test="workWitness != null" >
+        WORK_WITNESS = #{workWitness,jdbcType=VARCHAR},
+      </if>
+      <if test="workWitnessPhone != null" >
+        WORK_WITNESS_PHONE = #{workWitnessPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.moon.extension.poi.model.ApplicantWork" >
+    update APPLICANT_WORK
+    set ID_NO = #{idNo,jdbcType=VARCHAR},
+      WORK_START = #{workStart,jdbcType=VARCHAR},
+      WORK_END = #{workEnd,jdbcType=VARCHAR},
+      WORK_COMPANY = #{workCompany,jdbcType=VARCHAR},
+      WORK_POST = #{workPost,jdbcType=VARCHAR},
+      WORK_SALARY = #{workSalary,jdbcType=VARCHAR},
+      WORK_END_REASON = #{workEndReason,jdbcType=VARCHAR},
+      WORK_WITNESS = #{workWitness,jdbcType=VARCHAR},
+      WORK_WITNESS_PHONE = #{workWitnessPhone,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

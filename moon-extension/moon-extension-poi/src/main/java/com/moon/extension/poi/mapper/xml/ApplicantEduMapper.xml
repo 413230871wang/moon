@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moon.extension.poi.mapper.ApplicantEduMapper" >
+  <resultMap id="BaseResultMap" type="com.moon.extension.poi.model.ApplicantEdu" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ID_NO" property="idNo" jdbcType="VARCHAR" />
+    <result column="EDU_START" property="eduStart" jdbcType="VARCHAR" />
+    <result column="EDU_END" property="eduEnd" jdbcType="VARCHAR" />
+    <result column="EDU_SCHOOL" property="eduSchool" jdbcType="VARCHAR" />
+    <result column="EDU_MAJOR" property="eduMajor" jdbcType="VARCHAR" />
+    <result column="EDU_DEGREE" property="eduDegree" jdbcType="VARCHAR" />
+    <result column="EDU_TYPE" property="eduType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ID_NO, EDU_START, EDU_END, EDU_SCHOOL, EDU_MAJOR, EDU_DEGREE, EDU_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.moon.extension.poi.model.ApplicantEduExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from APPLICANT_EDU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from APPLICANT_EDU
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from APPLICANT_EDU
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.moon.extension.poi.model.ApplicantEduExample" >
+    delete from APPLICANT_EDU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.moon.extension.poi.model.ApplicantEdu" >
+    insert into APPLICANT_EDU (ID, ID_NO, EDU_START, 
+      EDU_END, EDU_SCHOOL, EDU_MAJOR, 
+      EDU_DEGREE, EDU_TYPE)
+    values (#{id,jdbcType=INTEGER}, #{idNo,jdbcType=VARCHAR}, #{eduStart,jdbcType=VARCHAR}, 
+      #{eduEnd,jdbcType=VARCHAR}, #{eduSchool,jdbcType=VARCHAR}, #{eduMajor,jdbcType=VARCHAR}, 
+      #{eduDegree,jdbcType=VARCHAR}, #{eduType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.moon.extension.poi.model.ApplicantEdu" >
+    insert into APPLICANT_EDU
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="idNo != null" >
+        ID_NO,
+      </if>
+      <if test="eduStart != null" >
+        EDU_START,
+      </if>
+      <if test="eduEnd != null" >
+        EDU_END,
+      </if>
+      <if test="eduSchool != null" >
+        EDU_SCHOOL,
+      </if>
+      <if test="eduMajor != null" >
+        EDU_MAJOR,
+      </if>
+      <if test="eduDegree != null" >
+        EDU_DEGREE,
+      </if>
+      <if test="eduType != null" >
+        EDU_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="idNo != null" >
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="eduStart != null" >
+        #{eduStart,jdbcType=VARCHAR},
+      </if>
+      <if test="eduEnd != null" >
+        #{eduEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="eduSchool != null" >
+        #{eduSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="eduMajor != null" >
+        #{eduMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="eduDegree != null" >
+        #{eduDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="eduType != null" >
+        #{eduType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+     <insert id="insertByList" parameterType="list">
+      insert into APPLICANT_EDU (ID_NO, EDU_START,
+        EDU_END, EDU_SCHOOL, EDU_MAJOR,
+        EDU_DEGREE, EDU_TYPE)
+      values
+      <foreach collection="list" item="edu" separator="," open="(" close=")">
+        #{edu.idNo,jdbcType=VARCHAR}, #{edu.eduStart,jdbcType=VARCHAR},
+        #{edu.eduEnd,jdbcType=VARCHAR}, #{edu.eduSchool,jdbcType=VARCHAR}, #{edu.eduMajor,jdbcType=VARCHAR},
+        #{edu.eduDegree,jdbcType=VARCHAR}, #{edu.eduType,jdbcType=VARCHAR}
+      </foreach>
+    </insert>
+    <select id="countByExample" parameterType="com.moon.extension.poi.model.ApplicantEduExample" resultType="java.lang.Integer" >
+    select count(*) from APPLICANT_EDU
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectEduMapByIdNo" parameterType="string" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from APPLICANT_EDU
+    where idNo = #{idNo,jdbcType=VARCHAR}
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update APPLICANT_EDU
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.idNo != null" >
+        ID_NO = #{record.idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eduStart != null" >
+        EDU_START = #{record.eduStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eduEnd != null" >
+        EDU_END = #{record.eduEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eduSchool != null" >
+        EDU_SCHOOL = #{record.eduSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eduMajor != null" >
+        EDU_MAJOR = #{record.eduMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eduDegree != null" >
+        EDU_DEGREE = #{record.eduDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eduType != null" >
+        EDU_TYPE = #{record.eduType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update APPLICANT_EDU
+    set ID = #{record.id,jdbcType=INTEGER},
+      ID_NO = #{record.idNo,jdbcType=VARCHAR},
+      EDU_START = #{record.eduStart,jdbcType=VARCHAR},
+      EDU_END = #{record.eduEnd,jdbcType=VARCHAR},
+      EDU_SCHOOL = #{record.eduSchool,jdbcType=VARCHAR},
+      EDU_MAJOR = #{record.eduMajor,jdbcType=VARCHAR},
+      EDU_DEGREE = #{record.eduDegree,jdbcType=VARCHAR},
+      EDU_TYPE = #{record.eduType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.moon.extension.poi.model.ApplicantEdu" >
+    update APPLICANT_EDU
+    <set >
+      <if test="idNo != null" >
+        ID_NO = #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="eduStart != null" >
+        EDU_START = #{eduStart,jdbcType=VARCHAR},
+      </if>
+      <if test="eduEnd != null" >
+        EDU_END = #{eduEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="eduSchool != null" >
+        EDU_SCHOOL = #{eduSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="eduMajor != null" >
+        EDU_MAJOR = #{eduMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="eduDegree != null" >
+        EDU_DEGREE = #{eduDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="eduType != null" >
+        EDU_TYPE = #{eduType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.moon.extension.poi.model.ApplicantEdu" >
+    update APPLICANT_EDU
+    set ID_NO = #{idNo,jdbcType=VARCHAR},
+      EDU_START = #{eduStart,jdbcType=VARCHAR},
+      EDU_END = #{eduEnd,jdbcType=VARCHAR},
+      EDU_SCHOOL = #{eduSchool,jdbcType=VARCHAR},
+      EDU_MAJOR = #{eduMajor,jdbcType=VARCHAR},
+      EDU_DEGREE = #{eduDegree,jdbcType=VARCHAR},
+      EDU_TYPE = #{eduType,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -27,5 +27,6 @@
 		<module>moon-extension-blockchain</module>
 		<module>moon-extension-ai</module>
 		<module>moon-extension-otherlanguage</module>
+		<module>moon-extension-poi</module>
 	</modules>
 </project>

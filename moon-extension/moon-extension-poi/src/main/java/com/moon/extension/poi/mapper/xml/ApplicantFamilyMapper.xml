@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moon.extension.poi.mapper.ApplicantFamilyMapper" >
+  <resultMap id="BaseResultMap" type="com.moon.extension.poi.model.ApplicantFamily" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ID_NO" property="idNo" jdbcType="VARCHAR" />
+    <result column="FAMILY_NAME" property="familyName" jdbcType="VARCHAR" />
+    <result column="FAMILY_RELA" property="familyRela" jdbcType="VARCHAR" />
+    <result column="FAMILY_COMPANY" property="familyCompany" jdbcType="VARCHAR" />
+    <result column="FAMILY_POST" property="familyPost" jdbcType="VARCHAR" />
+    <result column="FAMILY_ADDRESS" property="familyAddress" jdbcType="VARCHAR" />
+    <result column="FAMILY_PHONE" property="familyPhone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ID_NO, FAMILY_NAME, FAMILY_RELA, FAMILY_COMPANY, FAMILY_POST, FAMILY_ADDRESS, 
+    FAMILY_PHONE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.moon.extension.poi.model.ApplicantFamilyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from APPLICANT_FAMILY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from APPLICANT_FAMILY
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from APPLICANT_FAMILY
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.moon.extension.poi.model.ApplicantFamilyExample" >
+    delete from APPLICANT_FAMILY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.moon.extension.poi.model.ApplicantFamily" >
+    insert into APPLICANT_FAMILY (ID, ID_NO, FAMILY_NAME, 
+      FAMILY_RELA, FAMILY_COMPANY, FAMILY_POST, 
+      FAMILY_ADDRESS, FAMILY_PHONE)
+    values (#{id,jdbcType=INTEGER}, #{idNo,jdbcType=VARCHAR}, #{familyName,jdbcType=VARCHAR}, 
+      #{familyRela,jdbcType=VARCHAR}, #{familyCompany,jdbcType=VARCHAR}, #{familyPost,jdbcType=VARCHAR}, 
+      #{familyAddress,jdbcType=VARCHAR}, #{familyPhone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.moon.extension.poi.model.ApplicantFamily" >
+    insert into APPLICANT_FAMILY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="idNo != null" >
+        ID_NO,
+      </if>
+      <if test="familyName != null" >
+        FAMILY_NAME,
+      </if>
+      <if test="familyRela != null" >
+        FAMILY_RELA,
+      </if>
+      <if test="familyCompany != null" >
+        FAMILY_COMPANY,
+      </if>
+      <if test="familyPost != null" >
+        FAMILY_POST,
+      </if>
+      <if test="familyAddress != null" >
+        FAMILY_ADDRESS,
+      </if>
+      <if test="familyPhone != null" >
+        FAMILY_PHONE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="idNo != null" >
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="familyName != null" >
+        #{familyName,jdbcType=VARCHAR},
+      </if>
+      <if test="familyRela != null" >
+        #{familyRela,jdbcType=VARCHAR},
+      </if>
+      <if test="familyCompany != null" >
+        #{familyCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="familyPost != null" >
+        #{familyPost,jdbcType=VARCHAR},
+      </if>
+      <if test="familyAddress != null" >
+        #{familyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="familyPhone != null" >
+        #{familyPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+    <insert id="insertByList" parameterType="list">
+      insert into APPLICANT_FAMILY (ID_NO, FAMILY_NAME,
+      FAMILY_RELA, FAMILY_COMPANY, FAMILY_POST,
+      FAMILY_ADDRESS, FAMILY_PHONE)
+      values
+      <foreach collection="list" item="family" separator="," open="(" close=")">
+        #{family.idNo,jdbcType=VARCHAR}, #{family.familyName,jdbcType=VARCHAR},
+        #{family.familyRela,jdbcType=VARCHAR}, #{family.familyCompany,jdbcType=VARCHAR}, #{family.familyPost,jdbcType=VARCHAR},
+        #{family.familyAddress,jdbcType=VARCHAR}, #{family.familyPhone,jdbcType=VARCHAR}
+      </foreach>
+    </insert>
+    <select id="countByExample" parameterType="com.moon.extension.poi.model.ApplicantFamilyExample" resultType="java.lang.Integer" >
+    select count(*) from APPLICANT_FAMILY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+    <select id="selectFamilyMapByIdNo" parameterType="string" resultType="java.util.Map">
+      select
+      <include refid="Base_Column_List" />
+      from APPLICANT_FAMILY
+      where idNo = #{idNo,jdbcType=VARCHAR}
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+    update APPLICANT_FAMILY
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.idNo != null" >
+        ID_NO = #{record.idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyName != null" >
+        FAMILY_NAME = #{record.familyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyRela != null" >
+        FAMILY_RELA = #{record.familyRela,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyCompany != null" >
+        FAMILY_COMPANY = #{record.familyCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyPost != null" >
+        FAMILY_POST = #{record.familyPost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyAddress != null" >
+        FAMILY_ADDRESS = #{record.familyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyPhone != null" >
+        FAMILY_PHONE = #{record.familyPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update APPLICANT_FAMILY
+    set ID = #{record.id,jdbcType=INTEGER},
+      ID_NO = #{record.idNo,jdbcType=VARCHAR},
+      FAMILY_NAME = #{record.familyName,jdbcType=VARCHAR},
+      FAMILY_RELA = #{record.familyRela,jdbcType=VARCHAR},
+      FAMILY_COMPANY = #{record.familyCompany,jdbcType=VARCHAR},
+      FAMILY_POST = #{record.familyPost,jdbcType=VARCHAR},
+      FAMILY_ADDRESS = #{record.familyAddress,jdbcType=VARCHAR},
+      FAMILY_PHONE = #{record.familyPhone,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.moon.extension.poi.model.ApplicantFamily" >
+    update APPLICANT_FAMILY
+    <set >
+      <if test="idNo != null" >
+        ID_NO = #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="familyName != null" >
+        FAMILY_NAME = #{familyName,jdbcType=VARCHAR},
+      </if>
+      <if test="familyRela != null" >
+        FAMILY_RELA = #{familyRela,jdbcType=VARCHAR},
+      </if>
+      <if test="familyCompany != null" >
+        FAMILY_COMPANY = #{familyCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="familyPost != null" >
+        FAMILY_POST = #{familyPost,jdbcType=VARCHAR},
+      </if>
+      <if test="familyAddress != null" >
+        FAMILY_ADDRESS = #{familyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="familyPhone != null" >
+        FAMILY_PHONE = #{familyPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.moon.extension.poi.model.ApplicantFamily" >
+    update APPLICANT_FAMILY
+    set ID_NO = #{idNo,jdbcType=VARCHAR},
+      FAMILY_NAME = #{familyName,jdbcType=VARCHAR},
+      FAMILY_RELA = #{familyRela,jdbcType=VARCHAR},
+      FAMILY_COMPANY = #{familyCompany,jdbcType=VARCHAR},
+      FAMILY_POST = #{familyPost,jdbcType=VARCHAR},
+      FAMILY_ADDRESS = #{familyAddress,jdbcType=VARCHAR},
+      FAMILY_PHONE = #{familyPhone,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--aop是基于代理完成的，所以我们要激活我们的自动代理-->
+    <aop:aspectj-autoproxy/>
+
+    <bean class="com.moon.spring.aop.advice.BeforeAdvice" id="beforeAdvice"/>
+
+    <aop:config>
+        <aop:aspect id="beforeAspect" ref="beforeAdvice">
+            <aop:before method="methodBefore" pointcut="execution(public * com.moon.spring.aop.service.BookService.*())"/>
+            <aop:before method="before" pointcut="execution(public * com.moon.spring.aop.service.BookService.*())"/>
+            <aop:after method="methodAfter" pointcut="execution(public * com.moon.spring.aop.service.BookService.*())"/>
+            <aop:after-throwing method="methodThrowingException" pointcut="execution(public * com.moon.spring.aop.service.BookService.*())"/>
+            <aop:around method="around" pointcut="execution(public * com.moon.spring.aop.service.BookService.show())"/>
+        </aop:aspect>
+
+        <aop:aspect id="afterReturning" ref="afterReturning">
+            <aop:after-returning method="afterReturning" pointcut="execution(public * com.moon.spring.aop.service.BookService.*())" returning="returning"/>
+        </aop:aspect>
+    </aop:config>
+
+    <bean class="com.moon.spring.aop.service.BookService" id="bookService"/>
+    <bean class="com.moon.spring.aop.advice.AfterReturning" id="afterReturning"/>
+
+    <bean class="org.springframework.aop.framework.ProxyFactoryBean" id="proxyFactoryBean">
+        <property name="proxyInterfaces">
+            <list>
+                <value>com.moon.spring.aop.service.StudentService</value>
+            </list>
+        </property>
+        <property name="interceptorNames" value="com.moon.spring.aop.advice.BeforeAdvice"/>
+    </bean>
+
+</beans>

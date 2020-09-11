@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moon.extension.poi.mapper.ResultTestMapper" >
+  <resultMap id="BaseResultMap" type="com.moon.extension.poi.model.ResultTest" >
+    <id column="ID_NO" property="idNo" jdbcType="VARCHAR" />
+    <result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+    <result column="COLLEAGUES_LIKE" property="colleaguesLike" jdbcType="VARCHAR" />
+    <result column="USER_CHARACTER" property="userCharacter" jdbcType="VARCHAR" />
+    <result column="BOOK_LOOKING" property="bookLooking" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_NO as idNo, COMMENTS as comments, COLLEAGUES_LIKE as colleaguesLike, USER_CHARACTER as userCharacter, BOOK_LOOKING as bookLooking, USER_NAME as userName
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.moon.extension.poi.model.ResultTestExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from RECRUIT_TEST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from RECRUIT_TEST
+    where ID_NO = #{idNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from RECRUIT_TEST
+    where ID_NO = #{idNo,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.moon.extension.poi.model.ResultTestExample" >
+    delete from RECRUIT_TEST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.moon.extension.poi.model.ResultTest" >
+    insert into RECRUIT_TEST (ID_NO, COMMENTS, COLLEAGUES_LIKE, 
+      USER_CHARACTER, BOOK_LOOKING, USER_NAME
+      )
+    values (#{idNo,jdbcType=VARCHAR}, #{comments,jdbcType=VARCHAR}, #{colleaguesLike,jdbcType=VARCHAR}, 
+      #{userCharacter,jdbcType=VARCHAR}, #{bookLooking,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.moon.extension.poi.model.ResultTest" >
+    insert into RECRUIT_TEST
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idNo != null" >
+        ID_NO,
+      </if>
+      <if test="comments != null" >
+        COMMENTS,
+      </if>
+      <if test="colleaguesLike != null" >
+        COLLEAGUES_LIKE,
+      </if>
+      <if test="userCharacter != null" >
+        USER_CHARACTER,
+      </if>
+      <if test="bookLooking != null" >
+        BOOK_LOOKING,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idNo != null" >
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null" >
+        #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="colleaguesLike != null" >
+        #{colleaguesLike,jdbcType=VARCHAR},
+      </if>
+      <if test="userCharacter != null" >
+        #{userCharacter,jdbcType=VARCHAR},
+      </if>
+      <if test="bookLooking != null" >
+        #{bookLooking,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.moon.extension.poi.model.ResultTestExample" resultType="java.lang.Integer" >
+    select count(*) from RECRUIT_TEST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+    <select id="selectMapByPrimaryKey" parameterType="string" resultType="java.util.Map">
+      select
+      <include refid="Base_Column_List"/>
+      from RECRUIT_TEST
+      where ID_NO = #{idNo,jdbcType=VARCHAR}
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+    update RECRUIT_TEST
+    <set >
+      <if test="record.idNo != null" >
+        ID_NO = #{record.idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comments != null" >
+        COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colleaguesLike != null" >
+        COLLEAGUES_LIKE = #{record.colleaguesLike,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userCharacter != null" >
+        USER_CHARACTER = #{record.userCharacter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookLooking != null" >
+        BOOK_LOOKING = #{record.bookLooking,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update RECRUIT_TEST
+    set ID_NO = #{record.idNo,jdbcType=VARCHAR},
+      COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      COLLEAGUES_LIKE = #{record.colleaguesLike,jdbcType=VARCHAR},
+      USER_CHARACTER = #{record.userCharacter,jdbcType=VARCHAR},
+      BOOK_LOOKING = #{record.bookLooking,jdbcType=VARCHAR},
+      USER_NAME = #{record.userName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.moon.extension.poi.model.ResultTest" >
+    update RECRUIT_TEST
+    <set >
+      <if test="comments != null" >
+        COMMENTS = #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="colleaguesLike != null" >
+        COLLEAGUES_LIKE = #{colleaguesLike,jdbcType=VARCHAR},
+      </if>
+      <if test="userCharacter != null" >
+        USER_CHARACTER = #{userCharacter,jdbcType=VARCHAR},
+      </if>
+      <if test="bookLooking != null" >
+        BOOK_LOOKING = #{bookLooking,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID_NO = #{idNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.moon.extension.poi.model.ResultTest" >
+    update RECRUIT_TEST
+    set COMMENTS = #{comments,jdbcType=VARCHAR},
+      COLLEAGUES_LIKE = #{colleaguesLike,jdbcType=VARCHAR},
+      USER_CHARACTER = #{userCharacter,jdbcType=VARCHAR},
+      BOOK_LOOKING = #{bookLooking,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR}
+    where ID_NO = #{idNo,jdbcType=VARCHAR}
+  </update>
+</mapper>
